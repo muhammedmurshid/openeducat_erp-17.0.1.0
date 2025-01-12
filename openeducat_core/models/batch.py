@@ -89,6 +89,7 @@ class OpBatch(models.Model):
 
     def act_confirm_batch(self):
         self.state = 'in_progress'
+        print('hi')
 
     _sql_constraints = [
         ('unique_batch_code',
