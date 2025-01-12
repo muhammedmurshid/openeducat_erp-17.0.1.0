@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_batch_tree" model="ir.ui.view">
+            <field name="name">op.batch.tree</field>
+            <field name="model">op.batch</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Batch">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="course_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_op_batch_form" model="ir.ui.view">
+            <field name="name">op.batch.form</field>
+            <field name="model">op.batch</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Batch">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="act_confirm_batch" type="object" string="Confirm" invisible="state != 'draft'"
+                                class="oe_highlight"/>
+                        <button name="allocate_students" type="object" string="Allocate Students"
+                                invisible="state != 'in_progress'"
+                                class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                invisible="active == True"/>
+                        <group>
+                            <group name="main">
+                                <field name="name"/>
+                                <field name="start_date"/>
+                                <field name="batch_type"/>
+                                <field name="course_id"/>
+                                <field name="branch_id"/>
+                                <field name="max_no_of_students"/>
+                                <field name="initiated_id"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                                <field name="end_date"/>
+                                <field name="remaining_days"/>
+                                <field name="class_type"/>
+<!--                                <field name="batch_type"/>-->
+                                <field name="total_no_of_students" style="background-color:#89d674; width:40px;"/>
+                                <field name="currency_id" invisible="1"/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Fee Types">
+                                <group>
+                                    <group name="lump_sump" string="Lump Sum Fee">
+                                        <field name="lump_fee_excluding_tax" placeholder="lump sum fee excluding tax"
+                                               widget="monetary"/>
+                                        <field name="lump_fee_including_tax" placeholder="lump sum fee including tax"
+                                               widget="monetary"/>
+                                        <field name="total_lump_sum_fee" widget="monetary"
+                                               style="background-color:#d3ecf2"/>
+                                    </group>
+                                    <group string="Lump sum Payment Plan - Offer Price" name="plan_lump_offer">
+                                        <field name="term"/>
+                                        <field name="amount_exc_lump" widget="monetary"/>
+                                        <field name="tax_amount_lump" widget="monetary"/>
+                                        <field name="amount_inc_lump" widget="monetary"/>
+                                        <field name="payment_date_lump"/>
+                                        <field name="difference_in_fee_lump" style="background-color:#e33b5a" widget="monetary"/>
+                                    </group>
+                                </group>
+                                <group name="installment" string="Installment">
+                                    <field name="installment_ids">
+                                        <tree editable="bottom">
+                                            <field name="currency_id" invisible="1"/>
+                                            <field name="term"/>
+                                            <field name="amount_exc_installment" widget="monetary"/>
+                                            <field name="tax_amount" widget="monetary"/>
+                                            <field name="amount_inc_installment" widget="monetary"/>
+                                            <field name="payment_date"/>
+
+
+                                        </tree>
+                                    </field>
+                                </group>
+
+                            </page>
+                            <page string="Students">
+                                <field name="student_ids">
+                                    <tree string="Students" editable="bottom">
+                                        <field name="student_id"/>
+                                        <field name="student_name"/>
+                                        <field name="date_of_admission"/>
+                                        <field name="admission_fee"/>
+                                        <field name="course_fee"/>
+                                        <field name="total_paid"/>
+
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_op_batch_search" model="ir.ui.view">
+            <field name="name">op.batch.search</field>
+            <field name="model">op.batch</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Batch">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="course_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="group_by_batch_start_date"
+                                string="Start Date" domain="[]"
+                                context="{'group_by':'start_date'}"/>
+                        <filter name="group_by_batch_end_date"
+                                string="End Date" domain="[]"
+                                context="{'group_by':'end_date'}"/>
+                        <filter name="group_by_batch_course"
+                                string="Course" domain="[]" context="{'group_by':'course_id'}"/>
+                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_op_batch_pivot" model="ir.ui.view">
+            <field name="name">op.batch.pivot</field>
+            <field name="model">op.batch</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <pivot string="Batch">
+                    <field name="name" type="row"/>
+                    <field name="course_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </pivot>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="act_open_op_batch_view">
+            <field name="name">Batches</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.batch</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="search_view_id" ref="view_op_batch_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_batch_view_form">
+            <field name="act_window_id" ref="act_open_op_batch_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_batch_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_batch_view_tree">
+            <field name="act_window_id" ref="act_open_op_batch_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_op_batch_tree"/>
+        </record>
+    </data>
+</odoo>

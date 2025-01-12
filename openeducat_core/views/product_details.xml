@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <!-- Odoo View Definition for Whatsapp Message Form -->
+   <record id="logic_product_details_view" model="ir.ui.view">
+       <field name="name">logic.product.details</field>
+       <field name="model">logic.product.details</field>
+       <field name="priority" eval="8"/>
+       <field name="arch" type="xml">
+           <form string="Product Details">
+               <group>
+                   <field name="name"/>
+                   <field name="price"/>
+               </group>
+
+               <footer>
+                   <button name="action_create_product" string="Add to Product" type="object" class="oe_highlight"/>
+                   <button name="cancel" string="Cancel" special="cancel"/>
+               </footer>
+           </form>
+       </field>
+   </record>
+</odoo>
