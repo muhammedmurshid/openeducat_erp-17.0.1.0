@@ -40,7 +40,7 @@ class OpBatch(models.Model):
         [('draft', 'Draft'), ('in_progress', 'In Progress'), ('completed', 'Completed'), ('up_coming', 'Up Coming')],
         string="Status", default='draft', tracking=True)
     remaining_days = fields.Integer(string="Remaining Days", compute="_compute_remaining_days", store=1)
-    branch_id = fields.Many2one('logic.branches', string="Branch")
+    # branch_id = fields.Many2one('logic.branches', string="Branch")
     admission_fee = fields.Integer(string="Admission Fee")
     course_fee = fields.Integer(string="Course Fee")
     student_ids = fields.One2many('logic.student.list', 'batch_id', )

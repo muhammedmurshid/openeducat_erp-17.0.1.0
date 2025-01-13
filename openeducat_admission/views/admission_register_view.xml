@@ -68,7 +68,7 @@
                             <group>
                                 <field name="course_id" readonly="state != 'draft'"/>
                                 <field name="batch_id" readonly="state != 'draft'"/>
-                                <field name="branch_id" readonly="state != 'draft'"/>
+<!--                                <field name="branch_id" readonly="state != 'draft'"/>-->
                                 <field name="end_date" readonly="state != 'draft'"/>
                                 <field name="min_count" readonly="state != 'draft'"/>
                                 <field name="company_id" groups="base.group_multi_company" optional="show"/>

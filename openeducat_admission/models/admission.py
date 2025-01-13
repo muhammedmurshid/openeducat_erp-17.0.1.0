@@ -112,7 +112,7 @@ class OpAdmission(models.Model):
     company_id = fields.Many2one(
         'res.company', string='Company',
         default=lambda self: self.env.user.company_id)
-    branch_id = fields.Many2one('logic.branches', string="Branch", required=1)
+    # branch_id = fields.Many2one('logic.branches', string="Branch", required=1)
     _sql_constraints = [
         ('unique_application_number',
          'unique(application_number)',

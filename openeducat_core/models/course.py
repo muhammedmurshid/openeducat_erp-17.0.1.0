@@ -43,7 +43,7 @@ class OpCourse(models.Model):
         default=lambda self:
         self.env.user.dept_id and self.env.user.dept_id.id or False)
     active = fields.Boolean(default=True)
-    branch_id = fields.Many2one('logic.branches', string="Branch")
+    # branch_id = fields.Many2one('logic.branches', string="Branch")
     course_type = fields.Selection(
         [('indian', 'Indian'), ('international', 'International'), ('crash', 'Crash'), ('repeaters', 'Repeaters'),
          ('nil', 'Nil')], string="Type")

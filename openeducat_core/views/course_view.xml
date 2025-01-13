@@ -44,7 +44,7 @@
                             <group name="main">
                                 <field name="evaluation_type"/>
                                 <field name="min_unit_load"/>
-                                <field name="branch_id"/>
+<!--                                <field name="branch_id"/>-->
                                 <field name="course_type"/>
                                 <field name="department_id" groups="openeducat_core.group_multi_department"/>
                             </group>

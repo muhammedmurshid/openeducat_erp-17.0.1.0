@@ -93,7 +93,7 @@
                                                widget="selection"/>
                                         <field name="application_date" readonly="state == 'done'"/>
                                         <field name="course_id" readonly="state == 'done'"/>
-                                        <field name="branch_id" readonly="state == 'done'"/>
+<!--                                        <field name="branch_id" readonly="state == 'done'"/>-->
                                         <field name="discount"/>
                                         <field name="due_date" readonly="state == 'done'"/>
                                         <field name="is_student"/>

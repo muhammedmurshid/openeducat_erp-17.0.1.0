@@ -103,7 +103,7 @@ class OpStudent(models.Model):
                              string="Status", default="confirm")
     active = fields.Boolean(default=True)
     batch_id = fields.Many2one('op.batch', string="Batch", required=1)
-    branch_id = fields.Many2one('logic.branches', string="Branch")
+    # branch_id = fields.Many2one('logic.branches', string="Branch")
     course_id = fields.Many2one('op.course', string="Course")
     wallet_balance = fields.Float(string="Wallet Balance")
 

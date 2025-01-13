@@ -66,7 +66,7 @@ class OpAdmissionRegister(models.Model):
     minimum_age_criteria = fields.Integer('Minimum Required Age(Years)', default=3)
     application_count = fields.Integer(string="Total_record", compute="calculate_record_application")
     batch_id = fields.Many2one('op.batch', string="Batch", required=1)
-    branch_id = fields.Many2one('logic.branches', string="Branch")
+    # branch_id = fields.Many2one('logic.branches', string="Branch")
     company_id = fields.Many2one(
         'res.company', string='Company',
         default=lambda self: self.env.user.company_id)
