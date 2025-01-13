@@ -171,7 +171,7 @@ class OpAdmission(models.Model):
         self.company_id = self.register_id.company_id
         self.batch_id = self.register_id.batch_id.id
         self.admission_date = self.register_id.admission_date
-        self.branch_id = self.register_id.branch_id.id
+        # self.branch_id = self.register_id.branch_id.id
 
     @api.onchange('course_id')
     def onchange_course(self):
@@ -275,7 +275,7 @@ class OpAdmission(models.Model):
                 'user_id': student_user.id,
                 'company_id': self.company_id.id,
                 'partner_id': student_user.partner_id.id,
-                'branch_id': student.branch_id.id,
+                # 'branch_id': student.branch_id.id,
                 'batch_id': student.batch_id.id,
                 'course_id': student.course_id.id,
             })
